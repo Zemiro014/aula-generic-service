@@ -22,7 +22,6 @@ public class Employee implements Convertible<EmployeeDTO>{
 	}
 
 	public Employee(Long id, String name) {
-		super();
 		this.id = id;
 		this.name = name;
 	}

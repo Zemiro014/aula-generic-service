@@ -11,13 +11,11 @@ public class EmployeeDTO {
 	}
 
 	public EmployeeDTO(Long id, String name) {
-		super();
 		this.id = id;
 		this.name = name;
 	}
 	
 	public EmployeeDTO(Employee entity) {
-		super();
 		this.id = entity.getId();
 		this.name = entity.getName();
 	}

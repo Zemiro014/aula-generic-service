@@ -4,26 +4,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
 import com.devsuperior.demolazy.util.Convertible;
 
-@Service
-public class GenericService<T extends Convertible<DTO>, DTO, ID> {
+public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
 
-	@Autowired
-	private JpaRepository<T, ID> repository;
+	JpaRepository<T, ID> getRepository();
 	
-	public DTO findById(ID id) {
-		Optional<T> result = repository.findById(id);
+	/*
+	 * Implementação padrão. Uma interface aceita ter implementação padrão
+	 * */
+	default DTO findById(ID id) {
+		Optional<T> result = getRepository().findById(id);
 		return result.get().convert();
 	}
 	
-	public List<DTO> findAll() {
-		List<T> list = repository.findAll();
-		List<DTO> resultDTO = list.stream().map(x -> x.convert()).collect(Collectors.toList());
-		return resultDTO;
+	default List<DTO> findAll() {
+		List<T> list = getRepository().findAll();
+		List<DTO> listDTO = list.stream().map(x -> x.convert()).collect(Collectors.toList());
+		return listDTO;
 	}
 }

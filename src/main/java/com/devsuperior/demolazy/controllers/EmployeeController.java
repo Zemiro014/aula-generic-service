@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.demolazy.dto.EmployeeDTO;
-import com.devsuperior.demolazy.entities.Employee;
-import com.devsuperior.demolazy.services.GenericService;
+import com.devsuperior.demolazy.services.EmployeeService;
 
 @RestController
 @RequestMapping(value = "/employees")
 public class EmployeeController {
 
 	@Autowired
-	private GenericService<Employee, EmployeeDTO, Long> service;
+	private EmployeeService service;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<EmployeeDTO> findById(@PathVariable Long id) {
